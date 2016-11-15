@@ -34,7 +34,6 @@ def process_table(page):
         patents.append([patent_id, absolute_link])
     return patents
 
-
 def process_link(_link, data):
     global page_count
     print("scrapping " , _link,  " ...")
@@ -51,7 +50,6 @@ def process_link(_link, data):
         _link[-2] += "-p{}".format(page_count)
         _link = ".".join(_link)
         process_link(_link, data)
-    
     return data
         
 if __name__ == "__main__":
@@ -65,18 +63,15 @@ if __name__ == "__main__":
         if results is not None:
             patents.extend(results)
     try:
-        __import__("pandas")
+        pd = __import__("pandas")
     except ImportError:
             import csv
-            print("")
-            # remove duplicates if any
-            patents = [list(p) for p in set(frozenset(pat) for pat in patents)]
+            patents = [list(p) for p in set(frozenset(pat) for pat in patents)] # remove duplicates if any
             with open ("patents.csv", "w", encoding = "utf-8") as f:
                 writer = csv.writer(f)
                 for p in patents:
                     writer.writerow(p)
     else:
-        import pandas as pd
         patent_df = pd.DataFrame(data = patents, columns = ["PatentID", "URL"])
-        patent_df.drop_duplicates(subset = "PatentID", inplace = True)
+        patent_df.drop_duplicates(subset = "PatentID", inplace = True) # remove duplicates if any
         patent_df.to_csv("patents.csv", index_label="index")
