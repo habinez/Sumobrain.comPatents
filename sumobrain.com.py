@@ -19,18 +19,6 @@ def get_top_legel_links(tree):
             all_links.append(absolute_link)
         topic = page.text_content()
         categories.append({"Catorigy": topic, "alink": absolute_link, "rlink": relative_link})
-        ## run this code to check if all the links are categorized
-        """
-        if relative_link.startswith('/dir'):
-            sub_tree = html.parse(absolute_link)
-            for pages in sub_tree.xpath('//*[@id="inner_content"]/a'):
-                for page in pages:
-                    page.make_link_absolute()
-                    link = page.get('href')
-                    if not link in all_links:
-                        print(link)
-                        all_links.append(link)
-        """
     return all_links
 #%%   
 def process_table(page):
@@ -88,7 +76,6 @@ if __name__ == "__main__":
                 for p in patents:
                     writer.writerow(p)
     else:
-        print("Pandas found !")
         import pandas as pd
         patent_df = pd.DataFrame(data = patents, columns = ["PatentID", "URL"])
         patent_df.drop_duplicates(subset = "PatentID", inplace = True)
