@@ -1,4 +1,5 @@
-# Sumobrain.comPatents
+# Sumobrain.com Patents Crawler
+
 List all the patents found on Sumobrain.com and save them to a csv file
 
 1. Pull all the patent data from the website
