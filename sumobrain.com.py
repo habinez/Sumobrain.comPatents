@@ -7,7 +7,7 @@ Created on Sat Nov  5 00:48:18 2016
 from lxml import html
 
 #%%
-def get_top_legel_links(tree):
+def get_top_level_links(tree):
     topics = tree.xpath('//*[@id="bottom_div"]/div/div/a')
     all_links = list()
     categories = list()
@@ -55,7 +55,7 @@ def process_link(_link, data):
 if __name__ == "__main__":
     sumobrain = "http://www.sumobrain.com/"
     tree = html.parse(sumobrain)
-    links = get_top_legel_links(tree)
+    links = get_top_level_links(tree)
     patents = []
     for link in links[:]:
         page_count = 1
