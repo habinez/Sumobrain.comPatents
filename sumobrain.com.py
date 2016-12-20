@@ -3,6 +3,26 @@
 Created on Sat Nov  5 00:48:18 2016
 
 @author: Concorde Habineza
+
+# Sumobrain.com Patents Crawler
+
+List all the patents found on Sumobrain.com and save them to a csv file
+
+1. Pull all the patent data from the website
+
+2. Extract the patent ID's and the URLs
+
+3. Remove duplicate entries
+
+4. Save the Patent ID and url to csv file (`patents.csv`)
+
+## TO-DO
+1. Pull information from either the provided link or from the [USPTO.gov](https://www.uspto.gov/patents-application-process/search-patents) website
+
+2. Build more metadata for the datasets
+
+2. Group patents by simularities
+
 """
 from lxml import html
 
@@ -39,7 +59,7 @@ def process_link(_link, data):
     print("scrapping " , _link,  " ...")
     page = html.parse(_link)
     result = process_table(page)
-    if result != None:
+    if result:
         data.append(result)
     page_nums = page.xpath('//*[@id="results"]/div[2]/table[1]/tbody/tr/th[2]/div[2]/div/a')
     page_count += 1
